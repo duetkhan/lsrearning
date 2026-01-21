@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Telegram Mini App</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#0f172a;color:white;text-align:center;}
+.header{background:#1e293b;padding:15px;font-size:20px;}
+.card{margin:15px;padding:15px;background:#1e293b;border-radius:10px;}
+.btn{padding:10px 20px;border:none;border-radius:6px;background:#22c55e;font-weight:bold;cursor:pointer;margin:5px;}
+.counter{font-size:18px;margin-top:10px;}
+#rewardBtn{display:none;position:fixed;bottom:90px;right:20px;background:#facc15;color:black;padding:12px 18px;border-radius:50px;font-weight:bold;cursor:pointer;box-shadow:0 0 10px #000;}
+.banner{position:fixed;bottom:0;width:100%;background:#000;}
+</style>
+</head>
+
+<body>
+
+<div class="header">🚀 Telegram Mini App</div>
+
+<div class="card">
+  <p>Start button এ ক্লিক করলে Interstitial Ads দেখাবে</p>
+  <button class="btn" onclick="showInterstitial()">▶ Start</button>
+</div>
+
+<div class="card">
+  <div class="counter">
+    Total Ads Watched: <span id="count">0</span>
+  </div>
+</div>
+
+<div class="card">
+  <button class="btn" onclick="nextPage()">Next Page</button>
+</div>
+
+<!-- Floating Reward Button -->
+<div id="rewardBtn" onclick="showRewardedAd()">🎁 Reward</div>
+
+<!-- Banner Ad -->
+<div class="banner">
+  <script>
+    var ad_id = "BANNER_AD_ID"; /* Monetag Banner ID বসাও */
+  </script>
+  <script src="//js.monetag.com/BANNER_SCRIPT.js"></script> <!-- Monetag Banner Script বসাও -->
+</div>
+
+<script>
+let tg = window.Telegram.WebApp;
+tg.expand();
+
+let adCount = 0;
+
+// Interstitial Ad
+function showInterstitial(){
+  adCount++;
+  document.getElementById("count").innerText = adCount;
+
+  // Monetag Interstitial
+  var ad_id = "INTERSTITIAL_AD_ID"; // Monetag Interstitial ID বসাও
+  var s = document.createElement("script");
+  s.src = "//js.monetag.com/INTERSTITIAL_SCRIPT.js"; // Monetag Interstitial Script বসাও
+  document.body.appendChild(s);
+
+  if(adCount >= 20){
+    document.getElementById("rewardBtn").style.display = "block";
+  }
+}
+
+// Rewarded Ad
+function showRewardedAd(){
+  var ad_id = "REWARDED_AD_ID"; // Monetag Rewarded ID বসাও
+  var s = document.createElement("script");
+  s.src = "//js.monetag.com/REWARDED_SCRIPT.js"; // Monetag Rewarded Script বসাও
+  document.body.appendChild(s);
+
+  alert("Rewarded Ad Completed!");
+}
+
+// Next Page Button
+function nextPage(){
+  showInterstitial();
+  setTimeout(()=>{
+    window.open("https://sherpurbogura.blogspot.com","_blank");
+  },2000);
+}
+</script>
+
+</body>
+</html>
