@@ -5,7 +5,7 @@
 <title>LSR Earning App - Monetag</title>
 
 <!-- Monetag SDK -->
-<script src='//libtl.com/sdk.js' data-zone='10497540' data-sdk='show_10497540'></script>
+<script src='//libtl.com/sdk.js' data-zone='10501406' data-sdk='show_10501406'></script>
 
 <style>
 body {
@@ -69,7 +69,7 @@ function updateUI(){
 
 // 1. Start Button → Interstitial Ad
 function startAd(){
-  show_10497540().then(()=>{
+  show_10501406().then(()=>{
     adsWatched++;
     updateUI();
 
@@ -82,7 +82,7 @@ function startAd(){
 
 // 4. Reward Button → Rewarded Interstitial
 function showReward(){
-  show_10497540().then(()=>{
+  show_10501406().then(()=>{
     coins += 50;
     updateUI();
     alert("You got 50 coins reward!");
@@ -91,13 +91,13 @@ function showReward(){
 
 // 5. Next Button → Ad + Open Website
 function nextPage(){
-  show_10497540().then(()=>{
+  show_10501406().then(()=>{
     window.open("https://sherpurbogura.blogspot.com", "_blank");
   });
 }
 
 // 3. In-App Interstitial (Auto Ads like Banner)
-show_10497540({
+show_10501406({
   type: 'inApp',
   inAppSettings: {
     frequency: 2,
@@ -111,9 +111,3 @@ show_10497540({
 
 </body>
 </html>
-
-
-
-
-
-
