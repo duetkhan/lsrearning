@@ -7,7 +7,7 @@
 <script>(function(s){s.dataset.zone='10501483',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 <!-- Monetag SDK -->
 <script src='//libtl.com/sdk.js' data-zone='204440' data-sdk='show_204440'></script>
-  <script>(function(s){s.dataset.zone='10501483',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+  <script>(function(s){s.dataset.zone='204440',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 <style>
 body {
   font-family: Arial, sans-serif;
@@ -70,12 +70,12 @@ function updateUI(){
 
 // 1. Start Button → Interstitial Ad
 function startAd(){
-  show_10501511().then(()=>{
+  show_204440().then(()=>{
     adsWatched++;
     updateUI();
 
     // 20 ads হলে reward button দেখাবে
-    if(adsWatched >= 20){
+    if(adsWatched >= 50){
       document.getElementById("rewardBtn").style.display = "block";
     }
   });
@@ -83,7 +83,7 @@ function startAd(){
 
 // 4. Reward Button → Rewarded Interstitial
 function showReward(){
-  show_10501483().then(()=>{
+  show_204440().then(()=>{
     coins += 50;
     updateUI();
     alert("You got 50 coins reward!");
@@ -92,13 +92,13 @@ function showReward(){
 
 // 5. Next Button → Ad + Open Website
 function nextPage(){
-  show_10501513().then(()=>{
+  show_204440().then(()=>{
     window.open("https://sherpurbogura.blogspot.com", "_blank");
   });
 }
 
 // 3. In-App Interstitial (Auto Ads like Banner)
-show_10501512({
+show_204440({
   type: 'inApp',
   inAppSettings: {
     frequency: 2,
