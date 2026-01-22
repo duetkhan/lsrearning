@@ -2,12 +2,101 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Telegram Mini App</title>
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<title>Telegram Mini App - Monetag</title>
 
+<!-- Monetag SDK -->
+<script src='//libtl.com/sdk.js' data-zone='10497540' data-sdk='show_10497540'></script>
 
-// In-App Interstitial
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #111;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+button {
+  padding: 12px 20px;
+  margin: 8px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background: #00c853;
+  color: white;
+}
+#banner {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+#rewardBtn {
+  display: none;
+  position: fixed;
+  right: 20px;
+  bottom: 80px;
+  background: gold;
+  color: black;
+}
+</style>
+</head>
 
+<body>
+
+<h2>Telegram Mini App Monetag</h2>
+
+<p id="count">Ads Watched: 0</p>
+<p id="coins">Coins: 0</p>
+
+<button onclick="startAd()">Start (Show Interstitial)</button>
+<br>
+<button onclick="nextPage()">Next (Ad + Open Website)</button>
+
+<!-- Floating Reward Button -->
+<button id="rewardBtn" onclick="showReward()">🎁 Reward</button>
+
+<!-- Banner Area (using inApp auto ads as banner alternative) -->
+<div id="banner"></div>
+
+<script>
+let adsWatched = 0;
+let coins = 0;
+
+// Update UI
+function updateUI(){
+  document.getElementById("count").innerText = "Ads Watched: " + adsWatched;
+  document.getElementById("coins").innerText = "Coins: " + coins;
+}
+
+// 1. Start Button → Interstitial Ad
+function startAd(){
+  show_10497540().then(()=>{
+    adsWatched++;
+    updateUI();
+
+    // 20 ads হলে reward button দেখাবে
+    if(adsWatched >= 20){
+      document.getElementById("rewardBtn").style.display = "block";
+    }
+  });
+}
+
+// 4. Reward Button → Rewarded Interstitial
+function showReward(){
+  show_10497540().then(()=>{
+    coins += 50;
+    updateUI();
+    alert("You got 50 coins reward!");
+  });
+}
+
+// 5. Next Button → Ad + Open Website
+function nextPage(){
+  show_10497540().then(()=>{
+    window.open("https://sherpurbogura.blogspot.com", "_blank");
+  });
+}
+
+// 3. In-App Interstitial (Auto Ads like Banner)
 show_10497540({
   type: 'inApp',
   inAppSettings: {
@@ -17,101 +106,14 @@ show_10497540({
     timeout: 5,
     everyPage: false
   }
-})
-
-/*
-This value is decoded as follows:
-- show automatically 2 ads
-  within 0.1 hours (6 minutes)
-  with a 30-second interval between them
-  and a 5-second delay before the first one is shown.
-  The last digit, 0, means that the session will be saved when you navigate between pages.
-  If you set the last digit as 1, then at any transition between pages,
-  the session will be reset, and the ads will start again.
-*/
-
-
-<style>
-body{margin:0;font-family:Arial,sans-serif;background:#0f172a;color:white;text-align:center;}
-.header{background:#1e293b;padding:15px;font-size:20px;}
-.card{margin:15px;padding:15px;background:#1e293b;border-radius:10px;}
-.btn{padding:10px 20px;border:none;border-radius:6px;background:#22c55e;font-weight:bold;cursor:pointer;margin:5px;}
-.counter{font-size:18px;margin-top:10px;}
-#rewardBtn{display:none;position:fixed;bottom:90px;right:20px;background:#facc15;color:black;padding:12px 18px;border-radius:50px;font-weight:bold;cursor:pointer;box-shadow:0 0 10px #000;}
-.banner{position:fixed;bottom:0;width:100%;background:#000;}
-</style>
-</head>
-
-<body>
-
-<div class="header">🚀 Telegram Mini App</div>
-
-<div class="card">
-  <p>Start button এ ক্লিক করলে Interstitial Ads দেখাবে</p>
-  <button class="btn" onclick="showInterstitial()">▶ Start</button>
-</div>
-
-<div class="card">
-  <div class="counter">
-    Total Ads Watched: <span id="count">0</span>
-  </div>
-</div>
-
-<div class="card">
-  <button class="btn" onclick="nextPage()">Next Page</button>
-</div>
-
-<!-- Floating Reward Button -->
-<div id="rewardBtn" onclick="showRewardedAd()">🎁 Reward</div>
-
-<!-- Banner Ad -->
-<div class="banner">
-  <script>
-    var ad_id = "BANNER_AD_ID"; /* Monetag Banner ID বসাও */
-  </script>
-  <script src="//js.monetag.com/BANNER_SCRIPT.js"></script> <!-- Monetag Banner Script বসাও -->
-</div>
-
-<script>
-let tg = window.Telegram.WebApp;
-tg.expand();
-
-let adCount = 0;
-
-// Interstitial Ad
-function showInterstitial(){
-  adCount++;
-  document.getElementById("count").innerText = adCount;
-
-  // Monetag Interstitial
-  var ad_id = "INTERSTITIAL_AD_ID"; // Monetag Interstitial ID বসাও
-  var s = document.createElement("script");
-  s.src = "//js.monetag.com/INTERSTITIAL_SCRIPT.js"; // Monetag Interstitial Script বসাও
-  document.body.appendChild(s);
-
-  if(adCount >= 20){
-    document.getElementById("rewardBtn").style.display = "block";
-  }
-}
-
-// Rewarded Ad
-function showRewardedAd(){
-  var ad_id = "REWARDED_AD_ID"; // Monetag Rewarded ID বসাও
-  var s = document.createElement("script");
-  s.src = "//js.monetag.com/REWARDED_SCRIPT.js"; // Monetag Rewarded Script বসাও
-  document.body.appendChild(s);
-
-  alert("Rewarded Ad Completed!");
-}
-
-// Next Page Button
-function nextPage(){
-  showInterstitial();
-  setTimeout(()=>{
-    window.open("https://sherpurbogura.blogspot.com","_blank");
-  },2000);
-}
+});
 </script>
 
 </body>
 </html>
+
+
+
+
+
+
