@@ -6,7 +6,7 @@
 <script src="https://quge5.com/88/tag.min.js" data-zone="204440" async data-cfasync="false"></script>
 <script>(function(s){s.dataset.zone='10501483',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 <!-- Monetag SDK -->
-<script src='//libtl.com/sdk.js' data-zone='10501406' data-sdk='show_10501406'></script>
+<script src='//libtl.com/sdk.js' data-zone='204440' data-sdk='show_204440'></script>
   <script>(function(s){s.dataset.zone='10501483',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 <style>
 body {
@@ -70,7 +70,7 @@ function updateUI(){
 
 // 1. Start Button → Interstitial Ad
 function startAd(){
-  show_10501406().then(()=>{
+  show_10501511().then(()=>{
     adsWatched++;
     updateUI();
 
@@ -83,7 +83,7 @@ function startAd(){
 
 // 4. Reward Button → Rewarded Interstitial
 function showReward(){
-  show_10501406().then(()=>{
+  show_10501483().then(()=>{
     coins += 50;
     updateUI();
     alert("You got 50 coins reward!");
@@ -92,13 +92,13 @@ function showReward(){
 
 // 5. Next Button → Ad + Open Website
 function nextPage(){
-  show_10501406().then(()=>{
+  show_10501513().then(()=>{
     window.open("https://sherpurbogura.blogspot.com", "_blank");
   });
 }
 
 // 3. In-App Interstitial (Auto Ads like Banner)
-show_10501406({
+show_10501512({
   type: 'inApp',
   inAppSettings: {
     frequency: 2,
